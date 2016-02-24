@@ -16,7 +16,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm(FormMethod.Post)){
+    @using (Html.BeginForm("Edit", "HomeController", FormMethod.Post, new {enctype="multipart/form-data"})){
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
@@ -30,7 +30,7 @@
                 @Html.EditorFor(model => model.articulo.nombreArt)
                 @Html.ValidationMessageFor(model => model.articulo.nombreArt)
             </div>
-    
+                
             <div class="editor-label">
                 @Html.LabelFor(model => model.articulo.descArt)
             </div>
@@ -69,7 +69,16 @@
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.articulo.idProveedor, new SelectList(Model.proveedores, "idProveedor", "empresaPro"))
             </div>
-    
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.imagenArt)
+            </div>
+            <div class="editor-field">
+                <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.articulo.imagenArt)))" alt="Imagen" height="20" />
+                @*@Html.EditorFor(model => model.articulo.imagenArt)*@
+                <input type="file" id="ImageData" name="ImageData" />
+
+            </div>
             <p>
                 <input type="submit" value="Save" />
             </p>

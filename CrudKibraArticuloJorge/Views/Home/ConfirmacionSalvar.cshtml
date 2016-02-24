@@ -31,6 +31,12 @@
                 @Html.DisplayFor(model => model.articulo.nombreArt)
             </div>
             <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.imagenArt)
+            </div>
+            <div class=" display-field">
+                <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(item.articulo.imagenArt)))" alt="Imagen" height="20" />
+            </div>
+            <div class="display-label">
                 @Html.DisplayNameFor(model => model.articulo.descArt)
             </div>
             <div class="display-field">

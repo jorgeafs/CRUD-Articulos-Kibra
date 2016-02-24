@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using BL_Kibra;
 using Entity_Kibra;
 using CrudKibraArticulosJorge.Models;
+using System.IO;
 
 namespace CrudKibraArticulosJorge.Controllers
 {
@@ -86,9 +87,31 @@ namespace CrudKibraArticulosJorge.Controllers
         [HttpPost]
         public ActionResult Edit(ModeloVista articulo)
         {
+            var validImageTypes = new string[]
+            {
+                "image/gif",
+                "image/jpeg",
+                "image/pjpeg",
+                "image/png"
+            };
+
+            var upload = Request.Files["imageData"];
+
+            if (!validImageTypes.Contains(upload.ContentType))
+            {
+                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            }
+
             String accion = null;
+
             if (ModelState.IsValid)
             {
+                if (upload != null || upload.ContentLength > 0) //si la imagen existe 
+                {
+                    articulo.articulo.imagenArt = new Byte[upload.ContentLength];
+                    upload.InputStream.Read(articulo.articulo.imagenArt, 0, articulo.articulo.imagenArt.Length);
+                }
+                
                 accion = "ConfirmacionSalvar";
             }
             else
@@ -99,7 +122,7 @@ namespace CrudKibraArticulosJorge.Controllers
         }
 
         public ActionResult ConfirmacionSalvar(ModeloVista articulo)
-        {
+        {   
             return View(articulo);
         }
         [HttpPost, ActionName("ConfirmacionSalvar")]
