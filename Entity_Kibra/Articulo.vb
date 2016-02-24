@@ -116,7 +116,7 @@ Public Class Articulo
             _stockMinimo = value
         End Set
     End Property
-
+    <Required>
     Public Property idProveedor() As Integer
         Get
             Return _idProveedor
