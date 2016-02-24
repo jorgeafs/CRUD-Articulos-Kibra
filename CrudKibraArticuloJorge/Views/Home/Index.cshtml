@@ -1,0 +1,66 @@
+﻿@model List<CrudKibraArticulosJorge.Models.ModeloVista>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.nombreArt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.descArt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.precioArt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.stock)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.stockMinimo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model[0].articulo.proveedor.empresaPro)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.nombreArt)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.imagenArt)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.descArt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.precioArt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.stock)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.stockMinimo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.articulo.proveedor.empresaPro)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.articulo.idArticulo }) |
+            @Html.ActionLink("Details", "Details", new { id = item.articulo.idArticulo }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.articulo.idArticulo })
+        </td>
+    </tr>
+}
+
+</table>

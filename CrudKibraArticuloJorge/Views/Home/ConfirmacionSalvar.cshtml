@@ -1,0 +1,74 @@
+﻿@model CrudKibraArticulosJorge.Models.ModeloVista
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ConfirmacionSalvar</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>Articulo</legend>
+            @Html.HiddenFor(model => model.articulo.idArticulo)
+            @*@Html.DisplayFor(model => model.idArticulo)*@
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.nombreArt)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.nombreArt)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.descArt)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.descArt)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.precioArt)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.precioArt)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.stock)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.stock)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.stockMinimo)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.stockMinimo)
+            </div>
+            <div class="display-label">
+                @Html.DisplayNameFor(model => model.articulo.proveedor.empresaPro)
+            </div>
+            <div class="display-field">
+                @Html.DisplayFor(model => model.articulo.proveedor.empresaPro)
+            </div>
+    
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

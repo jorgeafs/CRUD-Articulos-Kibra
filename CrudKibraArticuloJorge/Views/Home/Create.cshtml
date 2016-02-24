@@ -1,0 +1,91 @@
+﻿@model CrudKibraArticulosJorge.Models.ModeloVista
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.8.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>Articulos</legend>
+    
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.idArticulo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.idArticulo)
+                @Html.ValidationMessageFor(model => model.idArticulo)
+            </div>*@
+    
+            <div class="editor-label">@* Todos los label tengo que hacer que se escriban bien solos.... *@
+                @Html.LabelFor(model => model.articulo.nombreArt)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.articulo.nombreArt)
+                @Html.ValidationMessageFor(model => model.articulo.nombreArt)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.descArt)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.articulo.descArt)
+                @Html.ValidationMessageFor(model => model.articulo.descArt)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.precioArt)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.articulo.precioArt)
+                @Html.ValidationMessageFor(model => model.articulo.precioArt)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.stock)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.articulo.stock)
+                @Html.ValidationMessageFor(model => model.articulo.stock)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.stockMinimo)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.articulo.stockMinimo)
+                @Html.ValidationMessageFor(model => model.articulo.stockMinimo)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.proveedor.empresaPro)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(model => model.articulo.idProveedor, new SelectList(Model.proveedores, "idProveedor", "empresaPro"), "Seleccione una empresa")
+            </div>
+    
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

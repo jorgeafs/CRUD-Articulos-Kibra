@@ -1,0 +1,9 @@
+
+GO
+ALTER TABLE  Articulos ALTER COLUMN [imagenArt] varBinary(MAX)
+
+GO
+
+INSERT INTO Articulos VALUES
+	('Chocolate',  (SELECT * FROM OPENROWSET(BULK N'F:\vacio.jpg', SINGLE_BLOB) AS imagen) , 'Chocolate del güenillo', 12.5, 200, 10,1)
+	,('Saquito pa pegar' , (SELECT * FROM OPENROWSET(BULK N'F:\vacio.jpg', SINGLE_BLOB) AS imagen1) , 'Saquito pa meter piñas',1.5,231,15,2)
