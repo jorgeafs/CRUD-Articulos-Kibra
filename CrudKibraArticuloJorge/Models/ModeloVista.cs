@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Windows.Media.Imaging;
 using Entity_Kibra;
 using System.ComponentModel.DataAnnotations;
@@ -20,6 +21,7 @@ namespace CrudKibraArticulosJorge.Models
         }
         public Articulo articulo { get; set; }
         public List<Proveedores> proveedores { get; set; }
+        [AllowHtml]
         public Image upload { get; set; }
     }
 }
