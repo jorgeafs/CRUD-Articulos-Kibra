@@ -95,21 +95,20 @@ namespace CrudKibraArticulosJorge.Controllers
                 "image/png"
             };
 
-            var upload = Request.Files["imageData"];
+            //var upload = articulo.upload;
 
-            if (!validImageTypes.Contains(upload.ContentType))
-            {
-                ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
-            }
+            //if (!validImageTypes.Contains(upload.GetType))
+            //{
+            //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
+            //}
 
             String accion = null;
 
             if (ModelState.IsValid)
             {
-                if (upload != null || upload.ContentLength > 0) //si la imagen existe 
+                if (articulo.upload != null)                                  //(upload != null) //si la imagen existe 
                 {
-                    articulo.articulo.imagenArt = new Byte[upload.ContentLength];
-                    upload.InputStream.Read(articulo.articulo.imagenArt, 0, articulo.articulo.imagenArt.Length);
+                    articulo.articulo.imagenArt = convierteImagenEnArrayDeBytes(articulo.upload);
                 }
                 
                 accion = "ConfirmacionSalvar";
@@ -235,6 +234,14 @@ namespace CrudKibraArticulosJorge.Controllers
             return RedirectToAction("Index");
         }
 
+        private byte[] convierteImagenEnArrayDeBytes(System.Drawing.Image imageIn)
+        {
+            using (var ms = new MemoryStream())
+            {
+                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
+                return ms.ToArray();
+            }
+        }
         //Codigo antiguo, lo dejo aqui para expediciones arqueologicas y para consultar
         //public ActionResult Edit(int id)
         //{
