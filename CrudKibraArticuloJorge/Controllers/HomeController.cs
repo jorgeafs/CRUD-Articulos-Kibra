@@ -137,6 +137,10 @@ namespace CrudKibraArticulosJorge.Controllers
         {
             try
             {
+                if (articulo.articulo.proveedor == null)
+                {
+                    articulo = TempData["modelo"] as ModeloVista;
+                }
                 ManejadoraBL manejaBL = new ManejadoraBL();
                 Articulo salvar = new Articulo(articulo.articulo.nombreArt, articulo.articulo.imagenArt, articulo.articulo.descArt, articulo.articulo.precioArt, articulo.articulo.stock, articulo.articulo.stockMinimo, articulo.articulo.idProveedor);
                 salvar.idArticulo = articulo.articulo.idArticulo;
