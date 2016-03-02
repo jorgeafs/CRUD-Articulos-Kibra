@@ -9,35 +9,34 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ConfirmacionSalvar</title>
+    <title>Delete</title>
 </head>
 <body>
     <script src="~/Scripts/jquery-1.8.2.min.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm())
-    {
+    @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
         <fieldset>
-            <legend>Detalle del articulo</legend>
-                        @Html.HiddenFor(model => model.articulo.idArticulo)
-                        @Html.HiddenFor(model => model.articulo.nombreArt)
-                        @Html.HiddenFor(model => model.articulo.imagenArt)
-                        @Html.HiddenFor(model => model.articulo.descArt)
-                        @Html.HiddenFor(model => model.articulo.precioArt)
-                        @Html.HiddenFor(model => model.articulo.stock)
-                        @Html.HiddenFor(model => model.articulo.stockMinimo)
-                        @Html.HiddenFor(model => model.articulo.idProveedor)
-                        @Html.HiddenFor(model => model.articulo.proveedor.empresaPro)
+            <legend>Articulo a borrar</legend>
+            @Html.HiddenFor(model => model.articulo.idArticulo)
+            @Html.HiddenFor(model => model.articulo.nombreArt)
+            @Html.HiddenFor(model => model.articulo.imagenArt)
+            @Html.HiddenFor(model => model.articulo.descArt)
+            @Html.HiddenFor(model => model.articulo.precioArt)
+            @Html.HiddenFor(model => model.articulo.stock)
+            @Html.HiddenFor(model => model.articulo.stockMinimo)
+            @Html.HiddenFor(model => model.articulo.idProveedor)
+            @Html.HiddenFor(model => model.articulo.proveedor.empresaPro)
             <div class="editor-label">
                 @Html.LabelFor(model => model.articulo.nombreArt)
             </div>
             <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.nombreArt)
-               
+
             </div>
 
             <div class="editor-label">
@@ -45,7 +44,7 @@
             </div>
             <div class="editor-field">
                 <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.articulo.imagenArt)))" alt="Imagen" height="20" />
-                
+
             </div>
 
             <div class="editor-label">
@@ -83,8 +82,7 @@
                 @Html.DisplayFor(model => model.articulo.proveedor.empresaPro)
             </div>
             <p>
-                <input type="submit" value="Save" />
-                <input type="submit" value="Edit" />
+                <input type="submit" value="Delete" />
             </p>
         </fieldset>
     }
