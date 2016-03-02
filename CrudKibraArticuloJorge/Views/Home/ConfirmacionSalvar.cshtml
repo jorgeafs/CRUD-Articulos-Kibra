@@ -16,57 +16,68 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm("ConfirmacionSalvar","HomeController", FormMethod.Post))
+    {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
         <fieldset>
-            <legend>Articulo</legend>
-            @Html.HiddenFor(model => model.articulo.idArticulo)
-            @*@Html.DisplayFor(model => model.idArticulo)*@
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.nombreArt)
+            <legend>Detalle del articulo</legend>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.nombreArt)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.nombreArt)
+                @Html.HiddenFor(model => model.articulo.nombreArt)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.imagenArt)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.imagenArt)
             </div>
-            <div class=" display-field">
-                <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(item.articulo.imagenArt)))" alt="Imagen" height="20" />
+            <div class="editor-field">
+                <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.articulo.imagenArt)))" alt="Imagen" height="20" />
+                @Html.HiddenFor(model => model.articulo.imagenArt)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.descArt)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.descArt)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.descArt)
+                @Html.HiddenFor(model => model.articulo.descArt)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.precioArt)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.precioArt)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.precioArt)
+                @Html.HiddenFor(model => model.articulo.precioArt)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.stock)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.stock)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.stock)
+                @Html.HiddenFor(model => model.articulo.stock)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.stockMinimo)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.stockMinimo)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.stockMinimo)
+                @Html.HiddenFor(model => model.articulo.stockMinimo)
             </div>
-            <div class="display-label">
-                @Html.DisplayNameFor(model => model.articulo.proveedor.empresaPro)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.articulo.proveedor.empresaPro)
             </div>
-            <div class="display-field">
+            <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.proveedor.empresaPro)
+                @Html.HiddenFor(model => model.articulo.proveedor.empresaPro)
             </div>
-    
             <p>
                 <input type="submit" value="Save" />
             </p>

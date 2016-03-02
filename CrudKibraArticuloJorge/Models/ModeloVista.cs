@@ -22,6 +22,6 @@ namespace CrudKibraArticulosJorge.Models
         public Articulo articulo { get; set; }
         public List<Proveedores> proveedores { get; set; }
         [AllowHtml]
-        public Image upload { get; set; }
+        public HttpPostedFileBase upload { get; set; }
     }
 }

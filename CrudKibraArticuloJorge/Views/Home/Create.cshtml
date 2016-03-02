@@ -77,6 +77,8 @@
             <div class="editor-field">
                 @Html.DropDownListFor(model => model.articulo.idProveedor, new SelectList(Model.proveedores, "idProveedor", "empresaPro"), "Seleccione una empresa")
             </div>
+
+            <input type="file" id="Upload" name="Upload" onchange="fileCheck(this);" />
     
             <p>
                 <input type="submit" value="Create" />

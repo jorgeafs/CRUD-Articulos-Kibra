@@ -16,7 +16,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm("Edit", "HomeController", FormMethod.Post, new {enctype="multipart/form-data"})){
+    @using (Html.BeginForm(null, null , FormMethod.Post, new {enctype="multipart/form-data"})){
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
     
@@ -75,8 +75,8 @@
             </div>
             <div class="editor-field">
                 <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.articulo.imagenArt)))" alt="Imagen" height="20" />
-                @*@Html.EditorFor(model => model.articulo.imagenArt)*@
-                <input type="file" id="ImageData" name="ImageData" onchange="fileCheck(this);" />
+                @Html.HiddenFor(model => model.articulo.imagenArt)
+                <input type="file" id="Upload" name="Upload" onchange="fileCheck(this);" />
 
             </div>
             <p>

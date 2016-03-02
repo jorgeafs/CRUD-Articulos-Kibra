@@ -22,7 +22,8 @@ namespace CrudKibraArticulosJorge.Controllers
             List<ModeloVista> mostrar = new List<ModeloVista>(0);
             try {
                 ManejadoraBL manejaBL = new ManejadoraBL();
-                foreach (Articulo articulo in manejaBL.listaArticulosBL())
+                List<Articulo> manejaArticulo = manejaBL.listaArticulosBL();
+                foreach (Articulo articulo in manejaArticulo)
                 {
                     ModeloVista modelo = new ModeloVista();
                     modelo.articulo = articulo;
@@ -85,45 +86,48 @@ namespace CrudKibraArticulosJorge.Controllers
         //}
 
         [HttpPost]
-        public ActionResult Edit(ModeloVista articulo)
+        public ActionResult Edit(ModeloVista modelo)
         {
             var validImageTypes = new string[]
             {
                 "image/gif",
                 "image/jpeg",
+                "image/jpg",
                 "image/pjpeg",
                 "image/png"
             };
 
             //var upload = articulo.upload;
 
-            //if (!validImageTypes.Contains(upload.GetType))
+            //if (!validImageTypes.Contains(modelo.upload.GetType().ToString()))
             //{
             //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
             //}
-
+            ManejadoraBL manejaBl = new ManejadoraBL();
+            modelo.articulo.proveedor = manejaBl.seleccionaProveedorBL(modelo.articulo.idProveedor);
             String accion = null;
-
+            if (modelo.upload != null)                                  //(upload != null) //si la imagen existe 
+            {
+                modelo.articulo.imagenArt = convierteImagenEnArrayDeBytes(modelo.upload);
+            }
             if (ModelState.IsValid)
             {
-                if (articulo.upload != null)                                  //(upload != null) //si la imagen existe 
-                {
-                    articulo.articulo.imagenArt = convierteImagenEnArrayDeBytes(articulo.upload);
-                }
                 
+
                 accion = "ConfirmacionSalvar";
             }
             else
             {
                 accion = "Edit";
             }
-            return RedirectToAction(accion, articulo);
+            return RedirectToAction(accion, modelo);
         }
 
         public ActionResult ConfirmacionSalvar(ModeloVista articulo)
-        {   
+        {
             return View(articulo);
         }
+
         [HttpPost, ActionName("ConfirmacionSalvar")]
         public ActionResult ConfirmacionEditar(ModeloVista articulo)
         {
@@ -187,6 +191,7 @@ namespace CrudKibraArticulosJorge.Controllers
             try
             {
                 manejaBL = new ManejadoraBL();
+                articulo.articulo.imagenArt = convierteImagenEnArrayDeBytes(articulo.upload);
                 nuevo = new Articulo(articulo.articulo.nombreArt, articulo.articulo.imagenArt,articulo.articulo.descArt, articulo.articulo.precioArt, articulo.articulo.stock, articulo.articulo.stockMinimo, articulo.articulo.idProveedor);
                 manejaBL.insertArticuloBL(nuevo);
             }
@@ -234,13 +239,11 @@ namespace CrudKibraArticulosJorge.Controllers
             return RedirectToAction("Index");
         }
 
-        private byte[] convierteImagenEnArrayDeBytes(System.Drawing.Image imageIn)
+        private byte[] convierteImagenEnArrayDeBytes(HttpPostedFileBase imageIn)
         {
-            using (var ms = new MemoryStream())
-            {
-                imageIn.Save(ms, System.Drawing.Imaging.ImageFormat.Gif);
-                return ms.ToArray();
-            }
+            MemoryStream target = new MemoryStream();
+            imageIn.InputStream.CopyTo(target);
+            return target.ToArray();
         }
         //Codigo antiguo, lo dejo aqui para expediciones arqueologicas y para consultar
         //public ActionResult Edit(int id)
