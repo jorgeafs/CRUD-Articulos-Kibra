@@ -112,20 +112,21 @@ namespace CrudKibraArticulosJorge.Controllers
             }
             if (ModelState.IsValid)
             {
-                
 
+                TempData["modelo"] = modelo;
                 accion = "ConfirmacionSalvar";
             }
             else
             {
                 accion = "Edit";
             }
-            return RedirectToAction(accion, modelo);
+            return RedirectToAction(accion);
         }
 
-        public ActionResult ConfirmacionSalvar(ModeloVista articulo)
+        public ActionResult ConfirmacionSalvar()
         {
-            return View(articulo);
+            ModeloVista modelo = TempData["modelo"] as ModeloVista;
+            return View(modelo);
         }
 
         [HttpPost, ActionName("ConfirmacionSalvar")]
