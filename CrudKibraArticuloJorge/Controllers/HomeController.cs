@@ -50,7 +50,7 @@ namespace CrudKibraArticulosJorge.Controllers
         {
             return View();
         }
-
+        [HttpGet]
         public ActionResult Edit(int id)
         {
             ModeloVista articuloMostrar = null;
@@ -103,8 +103,8 @@ namespace CrudKibraArticulosJorge.Controllers
             //{
             //    ModelState.AddModelError("ImageUpload", "Please choose either a GIF, JPG or PNG image.");
             //}
-            ManejadoraBL manejaBl = new ManejadoraBL();
-            modelo.articulo.proveedor = manejaBl.seleccionaProveedorBL(modelo.articulo.idProveedor);
+            ManejadoraBL manejaBL = new ManejadoraBL();
+            modelo.articulo.proveedor = manejaBL.seleccionaProveedorBL(modelo.articulo.idProveedor);
             String accion = null;
             if (modelo.upload != null)                                  //(upload != null) //si la imagen existe 
             {
@@ -112,25 +112,28 @@ namespace CrudKibraArticulosJorge.Controllers
             }
             if (ModelState.IsValid)
             {
-
-                TempData["modelo"] = modelo;
-                accion = "ConfirmacionSalvar";
+                Articulo salvar = new Articulo(modelo.articulo.nombreArt, modelo.articulo.imagenArt, modelo.articulo.descArt, modelo.articulo.precioArt, modelo.articulo.stock, modelo.articulo.stockMinimo, modelo.articulo.idProveedor);
+                salvar.idArticulo = modelo.articulo.idArticulo;
+                manejaBL.actualizarArticuloBL(salvar);
+                //TempData["modelo"] = modelo;
+                accion = "Index";
+                return RedirectToAction(accion);
             }
             else
             {
                 accion = "Edit";
+                return View(accion, modelo);
             }
-            return RedirectToAction(accion);
         }
 
-        public ActionResult ConfirmacionSalvar()
-        {
-            ModeloVista modelo = TempData["modelo"] as ModeloVista;
-            return View(modelo);
-        }
+        //public ActionResult ConfirmacionSalvar(ModeloVista modelo)
+        //{
+        //    //ModeloVista modelo = TempData["modelo"] as ModeloVista;
+        //    return View(modelo);
+        //}
 
-        [HttpPost, ActionName("ConfirmacionSalvar")]
-        public ActionResult ConfirmacionEditar(ModeloVista articulo)
+        [HttpPost]
+        public ActionResult ConfirmacionSalvar(ModeloVista articulo)
         {
             try
             {
@@ -239,6 +242,10 @@ namespace CrudKibraArticulosJorge.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+
+
 
         private byte[] convierteImagenEnArrayDeBytes(HttpPostedFileBase imageIn)
         {

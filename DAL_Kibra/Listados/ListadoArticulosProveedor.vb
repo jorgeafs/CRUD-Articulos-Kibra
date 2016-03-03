@@ -91,7 +91,7 @@ Public Class ListadoArticulosProveedor
         Dim resultado As Integer
         'Igualamos a Nothing para evitar warnings
         Dim miConexion As SqlConnection = Nothing
-        Dim imagen As Byte() = New Byte() {1}
+        'Dim imagen As Byte() = New Byte() {1}
 
         añadirArticulo = "INSERT INTO Articulos (nombreArt ,imagenArt ,descArt ,precioArt,stock,stockMinimo,idProveedor) VALUES (@nombreArt , @imagenArt , @descArt , @precioArt , @stock , @stockMinimo , @idProveedor)"
         Try
@@ -101,7 +101,7 @@ Public Class ListadoArticulosProveedor
             miCommand.Parameters.Add(New SqlParameter("@nombreArt", SqlDbType.NVarChar))
             miCommand.Parameters("@nombreArt").Value = articuloMod.nombreArt
             miCommand.Parameters.Add(New SqlParameter("@imagenArt", SqlDbType.Binary))
-            miCommand.Parameters("@imagenArt").Value = imagen ' articuloMod.imagenArt
+            miCommand.Parameters("@imagenArt").Value = articuloMod.imagenArt
             miCommand.Parameters.Add(New SqlParameter("@descArt", SqlDbType.NVarChar))
             miCommand.Parameters("@descArt").Value = articuloMod.descArt
             miCommand.Parameters.Add(New SqlParameter("@precioArt", SqlDbType.Money))
@@ -160,7 +160,7 @@ Public Class ListadoArticulosProveedor
         'Igualamos a Nothing para evitar warnings
         Dim miConexion As SqlConnection = Nothing
         'temporalmente usaremos esta variable para las imagenes
-        Dim imagen As Byte() = New Byte() {1}
+        'Dim imagen As Byte() = New Byte() {1}
 
         borrarArticulo = "UPDATE Articulos SET nombreArt = @nombreArt ,imagenArt = @imagenArt ,descArt = @descArt ,precioArt = @precioArt ,stock = @stock ,stockMinimo = @stockMinimo ,idProveedor = @idProveedor WHERE idArticulo = @idArticulo"
 
@@ -171,7 +171,7 @@ Public Class ListadoArticulosProveedor
             miCommand.Parameters.Add(New SqlParameter("@nombreArt", SqlDbType.NVarChar))
             miCommand.Parameters("@nombreArt").Value = articulo.nombreArt
             miCommand.Parameters.Add(New SqlParameter("@imagenArt", SqlDbType.Binary))
-            miCommand.Parameters("@imagenArt").Value = imagen ' articuloMod.imagenArt
+            miCommand.Parameters("@imagenArt").Value = articulo.imagenArt
             miCommand.Parameters.Add(New SqlParameter("@descArt", SqlDbType.NVarChar))
             miCommand.Parameters("@descArt").Value = articulo.descArt
             miCommand.Parameters.Add(New SqlParameter("@precioArt", SqlDbType.Money))

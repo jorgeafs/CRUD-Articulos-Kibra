@@ -16,7 +16,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     
-    @using (Html.BeginForm())
+    @using (Html.BeginForm("ConfirmacionSalvar", null))
     {
         @Html.AntiForgeryToken()
         @Html.ValidationSummary(true)
@@ -84,7 +84,6 @@
             </div>
             <p>
                 <input type="submit" value="Save" />
-                <input type="submit" value="Edit" />
             </p>
         </fieldset>
     }
