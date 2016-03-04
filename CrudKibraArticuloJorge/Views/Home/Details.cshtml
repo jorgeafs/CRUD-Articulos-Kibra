@@ -21,11 +21,18 @@
                 @Html.DisplayFor(model => model.articulo.nombreArt)
             </div>
 
+        <div class="editor-label">
+            @Html.LabelFor(model => model.articulo.imagenArt)
+        </div>
+        <div class="editor-field">
+            <img src="data:image/jpg;base64,@(Html.Raw(Convert.ToBase64String(Model.articulo.imagenArt)))" alt="Imagen" height="20" />
+        </div>
+
             <div class="editor-label">
                 @Html.LabelFor(model => model.articulo.descArt)
             </div>
             <div class="editor-field">
-               @Html.DisplayFor(model => model.articulo.descArt)
+                @Html.DisplayFor(model => model.articulo.descArt)
             </div>
 
             <div class="editor-label">
@@ -55,7 +62,7 @@
             <div class="editor-field">
                 @Html.DisplayFor(model => model.articulo.proveedor.empresaPro)
             </div>
-    </fieldset>
+</fieldset>
     <p>
         @Html.ActionLink("Back to List", "Index")
     </p>
